@@ -3,585 +3,999 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AssessPro — Expert Assessment Services</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>AssessmentHelp — Expert Assessment Writing Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1D6FDB;
+  --blue-dark:#1558B0;
+  --blue-light:#EBF3FF;
+  --blue-mid:#3B82F6;
+  --dark:#1E2337;
+  --dark2:#252A40;
+  --text:#2D3748;
+  --muted:#6B7280;
+  --border:#E5E7EB;
+  --white:#fff;
+  --ff:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff);color:var(--text);background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+img{max-width:100%}
 
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C97A;
-    --gold-dim: #8B6E2A;
-    --dark: #0D0E12;
-    --dark-2: #13151C;
-    --dark-3: #1A1D27;
-    --dark-4: #21253A;
-    --text: #E8E4D9;
-    --text-muted: #8A8578;
-    --border: rgba(201,168,76,0.15);
-    --ff-head: 'Playfair Display', Georgia, serif;
-    --ff-body: 'DM Sans', sans-serif;
-  }
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#f1f1f1}
+::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px}
 
-  html { scroll-behavior: smooth; }
+/* ── NAV ── */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:#fff;
+  box-shadow:0 1px 12px rgba(0,0,0,0.08);
+}
+.nav-wrap{
+  max-width:1280px;margin:0 auto;
+  padding:0 24px;
+  display:flex;align-items:center;gap:8px;height:70px;
+}
+.logo{
+  display:flex;align-items:center;gap:8px;
+  font-weight:800;font-size:1.1rem;color:var(--dark);
+  margin-right:16px;white-space:nowrap;flex-shrink:0;
+}
+.logo-icon{
+  width:40px;height:40px;background:var(--blue);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1.1rem;font-weight:800;
+}
+.logo small{display:block;font-size:0.55rem;font-weight:400;color:var(--muted);line-height:1}
+nav{display:flex;align-items:center;gap:4px;flex:1}
+.nav-link{
+  padding:8px 12px;border-radius:6px;font-size:0.88rem;font-weight:500;
+  color:var(--text);white-space:nowrap;cursor:pointer;
+  display:flex;align-items:center;gap:4px;position:relative;
+  transition:color 0.15s,background 0.15s;
+}
+.nav-link:hover,.nav-link.active{color:var(--blue);background:var(--blue-light)}
+.nav-link svg{width:14px;height:14px;transition:transform 0.2s}
+.nav-link:hover svg{transform:rotate(180deg)}
+/* dropdown */
+.dropdown{position:relative}
+.dropdown-menu{
+  position:absolute;top:calc(100% + 8px);left:0;
+  background:#fff;border-radius:10px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.12);
+  border:1px solid var(--border);
+  min-width:560px;padding:12px;
+  display:grid;grid-template-columns:1fr 1fr;gap:4px;
+  opacity:0;visibility:hidden;transform:translateY(-8px);
+  transition:all 0.2s;pointer-events:none;
+}
+.dropdown:hover .dropdown-menu,.dropdown-menu:hover{
+  opacity:1;visibility:visible;transform:translateY(0);pointer-events:all;
+}
+.dropdown-item{
+  padding:10px 14px;border-radius:6px;font-size:0.87rem;font-weight:500;
+  color:var(--text);cursor:pointer;transition:all 0.15s;
+}
+.dropdown-item:hover{background:var(--blue-light);color:var(--blue)}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto;flex-shrink:0}
+.btn-wa{
+  display:flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:6px;font-size:0.85rem;font-weight:500;
+  color:var(--text);border:1px solid var(--border);
+  transition:all 0.15s;cursor:pointer;background:#fff;
+}
+.btn-wa:hover{background:var(--blue-light);border-color:var(--blue);color:var(--blue)}
+.btn-quote{
+  background:var(--blue);color:#fff;
+  padding:10px 20px;border-radius:6px;font-size:0.88rem;font-weight:600;
+  border:none;cursor:pointer;transition:background 0.15s;white-space:nowrap;
+}
+.btn-quote:hover{background:var(--blue-dark)}
 
-  body {
-    background: var(--dark);
-    color: var(--text);
-    font-family: var(--ff-body);
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+/* ── HERO ── */
+.hero{
+  padding:110px 24px 60px;
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;
+}
+.hero-left{}
+.hero-h1{
+  font-size:clamp(2rem,3.5vw,2.8rem);
+  font-weight:800;line-height:1.18;color:var(--dark);
+  margin-bottom:20px;
+}
+.hero-h1 span{color:var(--blue)}
+.hero-sub{
+  font-size:1rem;color:var(--muted);line-height:1.7;
+  max-width:520px;margin-bottom:28px;
+}
+.ratings{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.rating-item{display:flex;align-items:center;gap:8px}
+.stars{color:#F59E0B;font-size:0.95rem;letter-spacing:1px}
+.rating-text{font-size:0.85rem;font-weight:600;color:var(--dark)}
+.rating-src{font-size:0.78rem;color:var(--muted)}
+.trust-badges{display:flex;gap:12px;flex-wrap:wrap}
+.badge{
+  display:flex;align-items:center;gap:8px;
+  border:1px solid var(--border);border-radius:8px;
+  padding:12px 16px;background:#fff;
+  box-shadow:0 1px 4px rgba(0,0,0,0.05);
+  font-size:0.83rem;font-weight:500;color:var(--dark);
+}
+.badge-icon{color:var(--blue);font-size:1.1rem}
 
-  /* ─── NAV ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 20px 5%;
-    display: flex; align-items: center; justify-content: space-between;
-    background: rgba(13,14,18,0.88);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-  }
-  .logo {
-    font-family: var(--ff-head);
-    font-size: 1.4rem;
-    color: var(--gold);
-    letter-spacing: 0.02em;
-    text-decoration: none;
-  }
-  .logo span { color: var(--text); }
-  nav ul { list-style: none; display: flex; gap: 36px; }
-  nav a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.88rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  nav a:hover { color: var(--gold); }
-  .nav-cta {
-    background: var(--gold);
-    color: var(--dark) !important;
-    padding: 9px 22px;
-    border-radius: 4px;
-    font-weight: 500 !important;
-    transition: background 0.2s !important;
-  }
-  .nav-cta:hover { background: var(--gold-light) !important; color: var(--dark) !important; }
+/* ── QUOTE CARD ── */
+.quote-card{
+  background:#fff;border-radius:14px;
+  box-shadow:0 8px 40px rgba(0,0,0,0.12);
+  border:1px solid var(--border);
+  padding:28px;
+}
+.quote-card-head{
+  background:var(--blue);color:#fff;border-radius:8px;
+  padding:14px 18px;margin-bottom:20px;text-align:center;
+  font-weight:700;font-size:1rem;
+}
+.quote-card-sub{font-size:0.82rem;opacity:0.85;font-weight:400;margin-top:3px}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;font-size:0.8rem;font-weight:600;color:var(--dark);margin-bottom:5px}
+.form-group input,.form-group select{
+  width:100%;border:1px solid var(--border);border-radius:7px;
+  padding:11px 14px;font-size:0.88rem;font-family:var(--ff);
+  color:var(--dark);background:#fff;outline:none;
+  transition:border-color 0.15s;
+}
+.form-group input:focus,.form-group select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,111,219,0.1)}
+.form-row{display:grid;grid-template-columns:120px 1fr;gap:8px}
+.btn-submit{
+  width:100%;background:var(--blue);color:#fff;
+  border:none;border-radius:7px;padding:13px;
+  font-size:0.95rem;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:background 0.15s;margin-bottom:10px;
+}
+.btn-submit:hover{background:var(--blue-dark)}
+.form-trust{
+  display:flex;gap:14px;justify-content:center;
+  font-size:0.74rem;color:var(--muted);
+}
+.form-trust span::before{content:'✓ ';color:var(--blue)}
+.card-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--border);margin-top:16px;padding-top:16px;
+  text-align:center;gap:8px;
+}
+.cstat-num{font-size:1.3rem;font-weight:800;color:var(--blue)}
+.cstat-label{font-size:0.72rem;color:var(--muted)}
 
-  /* ─── HERO ─── */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
-    padding: 120px 5% 80px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 80%);
-  }
-  .hero-inner { position: relative; max-width: 780px; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    border: 1px solid var(--border);
-    padding: 6px 16px;
-    border-radius: 100px;
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 32px;
-    animation: fadeUp 0.8s ease both;
-  }
-  .hero-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--gold);
-    animation: pulse 2s ease infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+/* ── TICKER ── */
+.ticker-wrap{
+  background:var(--blue);padding:14px 0;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+.ticker{display:flex;gap:0;animation:tickerMove 25s linear infinite;white-space:nowrap}
+.ticker:hover{animation-play-state:paused}
+@keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:0 28px;color:#fff;font-size:0.85rem;font-weight:500;
+}
+.ticker-item::after{content:'•';margin-left:28px;opacity:0.6}
 
-  h1 {
-    font-family: var(--ff-head);
-    font-size: clamp(2.6rem, 6vw, 4.4rem);
-    font-weight: 700;
-    line-height: 1.12;
-    color: var(--text);
-    margin-bottom: 24px;
-    animation: fadeUp 0.8s ease 0.1s both;
-  }
-  h1 em { font-style: italic; color: var(--gold); }
-  .hero p {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    max-width: 540px;
-    margin: 0 auto 44px;
-    animation: fadeUp 0.8s ease 0.2s both;
-  }
-  .hero-btns {
-    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-    animation: fadeUp 0.8s ease 0.3s both;
-  }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--gold);
-    color: var(--dark);
-    padding: 14px 32px;
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .btn-outline {
-    display: inline-flex; align-items: center; gap: 10px;
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 14px 32px;
-    border-radius: 4px;
-    font-weight: 400;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: border-color 0.2s, transform 0.15s;
-  }
-  .btn-outline:hover { border-color: var(--gold); transform: translateY(-1px); }
+/* ── SECTIONS ── */
+section{padding:80px 24px}
+.container{max-width:1200px;margin:0 auto}
+.section-title{font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800;color:var(--dark);margin-bottom:12px;text-align:center}
+.section-sub{text-align:center;color:var(--muted);font-size:0.95rem;max-width:540px;margin:0 auto 48px}
 
-  @keyframes fadeUp {
-    from { opacity:0; transform:translateY(24px); }
-    to   { opacity:1; transform:translateY(0); }
-  }
+/* ── FEATURE (no AI) ── */
+.feature-split{
+  display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;
+}
+.feature-visual{
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.feature-circle-outer{
+  width:300px;height:300px;border-radius:50%;
+  background:rgba(29,111,219,0.07);
+  display:flex;align-items:center;justify-content:center;
+}
+.feature-circle-inner{
+  width:200px;height:200px;border-radius:50%;
+  background:rgba(29,111,219,0.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:4rem;
+}
+.feature-badge-float{
+  position:absolute;bottom:20px;right:0;
+  background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.1);
+  padding:10px 16px;font-size:0.82rem;font-weight:600;color:var(--dark);
+  display:flex;align-items:center;gap:8px;
+  animation:floatBadge 3s ease-in-out infinite;
+}
+@keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.feature-badge-float::before{content:'✓';color:var(--blue);font-weight:800}
+.feature-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0 28px}
+.feature-list li{display:flex;align-items:center;gap:8px;font-size:0.88rem;color:var(--text)}
+.feature-list li::before{content:'✓';color:var(--blue);font-weight:700;flex-shrink:0}
+.feature-h2{font-size:clamp(1.5rem,2.5vw,2rem);font-weight:800;color:var(--dark);margin-bottom:14px}
+.feature-h2 span{color:var(--blue)}
+.feature-p{color:var(--muted);font-size:0.95rem;line-height:1.7;margin-bottom:20px}
+.btn-chat{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--blue);color:#fff;padding:12px 24px;border-radius:7px;
+  font-weight:600;font-size:0.9rem;cursor:pointer;border:none;
+  transition:background 0.15s;
+}
+.btn-chat:hover{background:var(--blue-dark)}
 
-  /* ─── SECTIONS ─── */
-  section { padding: 100px 5%; }
-  .section-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 14px;
-    font-weight: 500;
-  }
-  h2 {
-    font-family: var(--ff-head);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 600;
-    line-height: 1.2;
-    color: var(--text);
-    margin-bottom: 20px;
-  }
-  h2 em { font-style: italic; color: var(--gold); }
-  .section-sub {
-    color: var(--text-muted);
-    font-size: 1rem;
-    max-width: 520px;
-    margin-bottom: 60px;
-  }
-  .divider {
-    width: 48px; height: 2px;
-    background: var(--gold);
-    margin-bottom: 16px;
-  }
+/* ── PROCESS ── */
+#process{background:#F8FAFF}
+.process-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  position:relative;
+}
+.process-arrow{
+  position:absolute;top:40px;left:calc(33.33% - 10px);
+  color:var(--blue);font-size:1.3rem;z-index:1;
+}
+.process-arrow:last-of-type{left:calc(66.66% - 10px)}
+.process-card{
+  background:#fff;border-radius:12px;padding:32px 28px;
+  border:1px solid var(--border);text-align:center;
+  transition:box-shadow 0.2s,transform 0.2s;
+  position:relative;
+}
+.process-card:hover{box-shadow:0 8px 30px rgba(29,111,219,0.12);transform:translateY(-3px)}
+.process-num{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--blue-light);color:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin:0 auto 16px;
+}
+.process-card h3{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:10px}
+.process-card p{font-size:0.85rem;color:var(--muted);line-height:1.65}
+.process-connector{
+  display:flex;align-items:center;justify-content:center;
+  color:var(--blue);font-size:1.4rem;margin-top:40px;
+}
 
-  /* ─── STATS ─── */
-  .stats {
-    background: var(--dark-2);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 60px 5%;
-    display: flex; justify-content: center;
-    gap: 0;
-  }
-  .stat {
-    flex: 1; max-width: 220px;
-    text-align: center;
-    padding: 0 32px;
-    border-right: 1px solid var(--border);
-  }
-  .stat:last-child { border-right: none; }
-  .stat-num {
-    font-family: var(--ff-head);
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .stat-label { font-size: 0.82rem; color: var(--text-muted); letter-spacing: 0.05em; }
+/* ── BLUE CTA BAND ── */
+.cta-band{
+  background:var(--blue);color:#fff;
+  padding:70px 24px;text-align:center;
+}
+.cta-band h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:16px}
+.cta-band p{opacity:0.85;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-white{
+  background:#fff;color:var(--blue);
+  padding:13px 28px;border-radius:7px;
+  font-weight:700;font-size:0.95rem;
+  display:inline-flex;align-items:center;gap:8px;
+  border:none;cursor:pointer;transition:opacity 0.15s;
+}
+.btn-white:hover{opacity:0.9}
+.btn-outline-white{
+  background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.6);
+  padding:13px 28px;border-radius:7px;
+  font-weight:600;font-size:0.95rem;
+  display:inline-flex;align-items:center;gap:8px;
+  cursor:pointer;transition:border-color 0.15s;
+}
+.btn-outline-white:hover{border-color:#fff}
 
-  /* ─── PROCESS ─── */
-  #process { background: var(--dark-2); }
-  .process-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .process-card {
-    background: var(--dark-2);
-    padding: 40px 36px;
-    transition: background 0.2s;
-    position: relative;
-  }
-  .process-card:hover { background: var(--dark-3); }
-  .step-num {
-    font-family: var(--ff-head);
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: rgba(201,168,76,0.1);
-    line-height: 1;
-    position: absolute;
-    top: 28px; right: 32px;
-  }
-  .step-icon {
-    width: 44px; height: 44px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-  }
-  .process-card h3 {
-    font-family: var(--ff-head);
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 10px;
-  }
-  .process-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; }
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:860px;margin:0 auto}
+.pricing-card{
+  border:1px solid var(--border);border-radius:12px;
+  padding:32px;background:#fff;
+}
+.pricing-card.featured{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.pricing-card h3{font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:20px}
+.pricing-card h3 span{color:var(--blue)}
+.price-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;border-bottom:1px solid #F3F4F6;
+  font-size:0.88rem;
+}
+.price-row:last-of-type{border-bottom:none}
+.price-label{color:var(--text);display:flex;align-items:center;gap:8px}
+.price-label::before{content:'✓';color:var(--blue);font-weight:700}
+.price-val{font-weight:700;color:var(--blue);font-size:0.85rem}
+.addon-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:0.88rem;
+}
+.addon-label{display:flex;align-items:center;gap:6px;color:var(--text)}
+.addon-label::before{content:'+';color:var(--blue);font-weight:700}
+.addon-price{font-weight:600;color:var(--muted)}
+.pricing-from{text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.pricing-from small{color:var(--muted);font-size:0.78rem}
+.pricing-price{font-size:2rem;font-weight:800;color:var(--blue)}
+.pricing-per{font-size:0.85rem;color:var(--muted)}
+.pricing-cta{margin-top:32px;text-align:center}
+.pricing-cta-card{
+  background:var(--blue-light);border-radius:10px;padding:24px;
+  text-align:center;max-width:480px;margin:28px auto 0;
+}
+.pricing-cta-card p{font-size:0.9rem;color:var(--dark);font-weight:500;margin-bottom:14px}
 
-  /* ─── OPTIONS ─── */
-  .options-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-  }
-  .option-card {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 48px 44px;
-    background: var(--dark-2);
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .option-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
-  .option-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: var(--gold);
-  }
-  .option-num {
-    font-family: var(--ff-head);
-    font-size: 0.85rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-  .option-card h3 {
-    font-family: var(--ff-head);
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-  .option-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
-  .option-list { list-style: none; }
-  .option-list li {
-    display: flex; align-items: flex-start; gap: 12px;
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
-  .option-list li:last-child { border-bottom: none; }
-  .option-list li::before {
-    content: '→';
-    color: var(--gold);
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
+/* ── BENEFITS ── */
+#benefits{background:#F8FAFF}
+.benefits-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.benefit-card{
+  background:#fff;border:1px solid var(--border);border-radius:12px;
+  padding:28px 24px;transition:box-shadow 0.2s,transform 0.2s;
+}
+.benefit-card:hover{box-shadow:0 6px 24px rgba(29,111,219,0.1);transform:translateY(-2px)}
+.benefit-icon{
+  width:48px;height:48px;background:var(--blue-light);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin-bottom:14px;
+}
+.benefit-card h3{font-size:0.95rem;font-weight:700;color:var(--dark);margin-bottom:8px}
+.benefit-card p{font-size:0.83rem;color:var(--muted);line-height:1.6}
 
-  /* ─── WHY US ─── */
-  #why { background: var(--dark-3); }
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .why-card {
-    padding: 36px 32px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--dark-2);
-    transition: border-color 0.2s;
-  }
-  .why-card:hover { border-color: var(--gold-dim); }
-  .why-icon { font-size: 1.6rem; margin-bottom: 18px; }
-  .why-card h3 {
-    font-family: var(--ff-head);
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 10px;
-  }
-  .why-card p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.65; }
+/* ── FAQ ── */
+.faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{
+  border:1px solid var(--border);border-radius:10px;overflow:hidden;
+  transition:border-color 0.2s;
+}
+.faq-item.open{border-color:var(--blue)}
+.faq-q{
+  padding:18px 20px;cursor:pointer;font-weight:600;font-size:0.93rem;color:var(--dark);
+  display:flex;justify-content:space-between;align-items:center;
+  user-select:none;background:#fff;
+}
+.faq-q:hover{background:var(--blue-light)}
+.faq-icon{
+  width:24px;height:24px;border-radius:50%;background:var(--blue-light);
+  color:var(--blue);display:flex;align-items:center;justify-content:center;
+  font-size:1rem;transition:transform 0.2s;flex-shrink:0;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--blue);color:#fff}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height 0.3s ease;
+  background:#fff;
+}
+.faq-a-inner{padding:0 20px 18px;font-size:0.88rem;color:var(--muted);line-height:1.7}
+.faq-item.open .faq-a{max-height:200px}
 
-  /* ─── CTA ─── */
-  .cta-section {
-    background: var(--dark-4);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    text-align: center;
-    padding: 100px 5%;
-    position: relative;
-    overflow: hidden;
-  }
-  .cta-section::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .cta-section h2 { margin-bottom: 18px; }
-  .cta-section p { color: var(--text-muted); margin-bottom: 44px; font-size: 1rem; }
-  .wa-btn {
-    display: inline-flex; align-items: center; gap: 12px;
-    background: #25D366;
-    color: white;
-    padding: 16px 36px;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .wa-btn:hover { background: #1EBE5A; transform: translateY(-1px); }
-  .wa-icon { width: 22px; height: 22px; }
+/* ── FOOTER ── */
+footer{background:var(--dark);color:#fff;padding:60px 24px 0}
+.footer-grid{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:260px 1fr 1fr 1fr 1fr;gap:40px;
+  padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.footer-brand{}
+.footer-logo{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.footer-logo .logo-icon{background:var(--blue)}
+.footer-tagline{font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.65;margin-bottom:20px}
+.social-icons{display:flex;gap:10px}
+.social-icon{
+  width:34px;height:34px;border-radius:6px;
+  border:1px solid rgba(255,255,255,0.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.85rem;color:rgba(255,255,255,0.6);
+  cursor:pointer;transition:all 0.15s;
+}
+.social-icon:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+.footer-col h4{font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:16px;letter-spacing:0.04em;text-transform:uppercase}
+.footer-col ul li{margin-bottom:10px}
+.footer-col ul a{font-size:0.83rem;color:rgba(255,255,255,0.5);transition:color 0.15s}
+.footer-col ul a:hover{color:#fff}
+.footer-contact-item{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:0.82rem;color:rgba(255,255,255,0.55);margin-bottom:12px;
+}
+.fc-icon{color:var(--blue);flex-shrink:0;margin-top:2px;font-size:0.9rem}
+.footer-wa-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#25D366;color:#fff;padding:10px 18px;border-radius:6px;
+  font-size:0.83rem;font-weight:600;margin-top:8px;cursor:pointer;
+  transition:background 0.15s;border:none;
+}
+.footer-wa-btn:hover{background:#1EBE5A}
+.footer-bottom{
+  max-width:1200px;margin:0 auto;
+  padding:20px 0;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-bottom p{font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.footer-trust{display:flex;gap:20px;flex-wrap:wrap}
+.footer-trust-item{
+  display:flex;align-items:center;gap:6px;
+  font-size:0.75rem;color:rgba(255,255,255,0.35);
+}
+.footer-trust-item::before{content:'🔒';font-size:0.8rem}
 
-  /* ─── FOOTER ─── */
-  footer {
-    padding: 48px 5%;
-    border-top: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 16px;
-  }
-  footer .logo { font-size: 1.1rem; }
-  footer p { font-size: 0.8rem; color: var(--text-muted); }
+/* ── FLOATING WHATSAPP ── */
+.float-wa{
+  position:fixed;bottom:24px;left:20px;z-index:900;
+  display:flex;align-items:flex-end;gap:10px;
+}
+.float-wa-btn{
+  width:52px;height:52px;border-radius:50%;background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(0,0,0,0.2);cursor:pointer;
+  animation:waPulse 2.5s ease-in-out infinite;border:none;
+}
+@keyframes waPulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.4)}70%{box-shadow:0 0 0 10px rgba(37,211,102,0)}}
+.float-wa-btn svg{width:28px;height:28px;fill:#fff}
+.float-wa-label{
+  background:#fff;border-radius:6px 6px 6px 0;
+  box-shadow:0 2px 12px rgba(0,0,0,0.1);
+  padding:8px 14px;font-size:0.82rem;font-weight:600;color:var(--dark);
+  animation:fadeInLeft 0.4s ease;cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+}
+.float-wa-label .x-btn{
+  width:16px;height:16px;border-radius:50%;background:#f3f4f6;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.65rem;cursor:pointer;color:var(--muted);margin-left:4px;
+  flex-shrink:0;
+}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+.float-wa-label.hidden{display:none}
 
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 768px) {
-    nav ul { display: none; }
-    .stats { flex-wrap: wrap; }
-    .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 24px 16px; }
-    .stat:last-child { border-bottom: none; }
-    .options-grid { grid-template-columns: 1fr; }
-    .why-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; text-align: center; }
-  }
+/* ── SCROLL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* ── COUNTER ── */
+.counter{display:inline-block}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;max-width:680px}
+  .quote-card{max-width:480px}
+  .feature-split{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .benefits-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  nav{display:none}
+  .hero{padding:90px 16px 40px;gap:32px}
+  .hero-h1{font-size:1.8rem}
+  .process-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .section-title{font-size:1.5rem}
+  .footer-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="logo">Assess<span>Pro</span></a>
-  <ul>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#options">Options</a></li>
-    <li><a href="#why">Why Us</a></li>
-    <li><a href="#contact" class="nav-cta">Get Started</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-inner">
-    <div class="hero-badge">Professional Assessment Services</div>
-    <h1>We Handle Your<br><em>Assessments</em> With Care</h1>
-    <p>Expert academic support from initial review to final submission — delivered with full transparency, zero upfront payment.</p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-primary">
-        <svg class="wa-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Chat on WhatsApp
+<!-- ── HEADER ── -->
+<header>
+  <div class="nav-wrap">
+    <a href="#" class="logo">
+      <div class="logo-icon">A</div>
+      <div>
+        <span>ASSESSMENT</span>
+        <small>Powered By The Student Helpline</small>
+      </div>
+    </a>
+    <nav>
+      <a class="nav-link active" href="#">Home</a>
+      <div class="dropdown">
+        <span class="nav-link">Services
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+        </span>
+        <div class="dropdown-menu">
+          <div class="dropdown-item">Assessment Help</div>
+          <div class="dropdown-item">Assignment Help</div>
+          <div class="dropdown-item">Coursework Help</div>
+          <div class="dropdown-item">Essay Writing Help</div>
+          <div class="dropdown-item">Dissertation Help</div>
+          <div class="dropdown-item">Case Study Help</div>
+          <div class="dropdown-item">Online Exam Help</div>
+        </div>
+      </div>
+      <div class="dropdown">
+        <span class="nav-link">Subjects
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+        </span>
+        <div class="dropdown-menu">
+          <div class="dropdown-item">Management</div>
+          <div class="dropdown-item">Law</div>
+          <div class="dropdown-item">Nursing</div>
+          <div class="dropdown-item">Engineering</div>
+          <div class="dropdown-item">Accounting</div>
+          <div class="dropdown-item">IT & Computer Science</div>
+          <div class="dropdown-item">Finance & Economics</div>
+        </div>
+      </div>
+      <a class="nav-link" href="#about">About Us</a>
+      <a class="nav-link" href="#process">How It Works</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a href="https://wa.me/your-number" class="btn-wa" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
       </a>
-      <a href="#process" class="btn-outline">See How It Works →</a>
+      <button class="btn-quote" onclick="document.querySelector('.quote-card').scrollIntoView({behavior:'smooth'})">Get Free Quote</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section style="padding:110px 24px 60px;background:#fff">
+  <div class="hero" style="padding:0;max-width:1200px">
+    <div class="hero-left reveal-left">
+      <h1 class="hero-h1"><span>Expert Assessment Help</span> for Students Worldwide: Top Assessment Helper Online</h1>
+      <p class="hero-sub">Professional assessment writing assistance from 1500+ PhD-qualified experts. 100% original, AI-free content delivered on time.</p>
+      <div class="ratings">
+        <div class="rating-item">
+          <span class="stars">★★★★★</span>
+          <span class="rating-text">4.9/5</span>
+          <span class="rating-src">Sitejabber</span>
+        </div>
+        <div class="rating-item">
+          <span class="stars">★★★★☆</span>
+          <span class="rating-text">4.7/5</span>
+          <span class="rating-src">Reviews.io</span>
+        </div>
+      </div>
+      <div class="trust-badges">
+        <div class="badge"><span class="badge-icon">🛡️</span> 100% AI-Free</div>
+        <div class="badge"><span class="badge-icon">⏰</span> On-Time</div>
+        <div class="badge"><span class="badge-icon">👥</span> 1500+ Experts</div>
+      </div>
+    </div>
+    <div class="quote-card reveal-right">
+      <div class="quote-card-head">
+        Get Free Quote Instantly
+        <div class="quote-card-sub">Enter your details and get a free quote instantly</div>
+      </div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Your Name">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <div class="form-row">
+          <select>
+            <option>IN +91</option>
+            <option>UK +44</option>
+            <option>AU +61</option>
+            <option>US +1</option>
+            <option>AE +971</option>
+          </select>
+          <input type="tel" placeholder="Phone Number">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Type of Service</label>
+        <select>
+          <option>Assessment Help</option>
+          <option>Assignment Help</option>
+          <option>Coursework Help</option>
+          <option>Dissertation Help</option>
+          <option>Essay Writing</option>
+        </select>
+      </div>
+      <button class="btn-submit" onclick="handleSubmit(this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+        Get Free Quote →
+      </button>
+      <div class="form-trust">
+        <span>Free consultation</span>
+        <span>No obligation</span>
+        <span>Instant response</span>
+      </div>
+      <div class="card-stats">
+        <div><div class="cstat-num"><span class="counter" data-target="180">0</span>K+</div><div class="cstat-label">Papers Done</div></div>
+        <div><div class="cstat-num"><span class="counter" data-target="99">0</span>%</div><div class="cstat-label">Satisfaction</div></div>
+        <div><div class="cstat-num">24/7</div><div class="cstat-label">Support</div></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats">
-  <div class="stat">
-    <div class="stat-num">100%</div>
-    <div class="stat-label">Upfront service, pay after</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">2</div>
-    <div class="stat-label">Flexible service options</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">∞</div>
-    <div class="stat-label">Revisions until approved</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">24/7</div>
-    <div class="stat-label">WhatsApp availability</div>
+<!-- ── TICKER ── -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">🎉 20% OFF for New Customers</span>
+    <span class="ticker-item">📚 1500+ Expert Writers Available</span>
+    <span class="ticker-item">⚡ 3-Hour Urgent Delivery</span>
+    <span class="ticker-item">✅ 100% Plagiarism-Free Guarantee</span>
+    <span class="ticker-item">🔒 100% Confidential</span>
+    <span class="ticker-item">💳 Pay After Delivery Option</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">🎉 20% OFF for New Customers</span>
+    <span class="ticker-item">📚 1500+ Expert Writers Available</span>
+    <span class="ticker-item">⚡ 3-Hour Urgent Delivery</span>
+    <span class="ticker-item">✅ 100% Plagiarism-Free Guarantee</span>
+    <span class="ticker-item">🔒 100% Confidential</span>
+    <span class="ticker-item">💳 Pay After Delivery Option</span>
   </div>
 </div>
 
-<!-- PROCESS -->
+<!-- ── FEATURE: NO AI ── -->
+<section>
+  <div class="container">
+    <div class="feature-split">
+      <div class="feature-visual reveal-left">
+        <div class="feature-circle-outer">
+          <div class="feature-circle-inner">🛡️</div>
+        </div>
+        <div class="feature-badge-float">100% Human Written</div>
+      </div>
+      <div class="reveal-right">
+        <h2 class="feature-h2">Our Experts Don't Use <span>AI Tools</span></h2>
+        <p class="feature-p">Unlike other services, we guarantee 100% human-written content. Every assessment is crafted by qualified experts with real academic experience.</p>
+        <ul class="feature-list">
+          <li>We follow your exact instructions</li>
+          <li>We accept pay after delivery option</li>
+          <li>We meet even the tightest deadlines</li>
+          <li>We ensure 100% confidentiality</li>
+          <li>We are plagiarism & AI-free</li>
+          <li>We provide 24/7 support</li>
+        </ul>
+        <button class="btn-chat" onclick="document.querySelector('.float-wa').scrollIntoView()">
+          💬 Let's Chat
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
 <section id="process">
-  <div class="section-label">How It Works</div>
-  <div class="divider"></div>
-  <h2>From inquiry to <em>submission</em></h2>
-  <p class="section-sub">A clear, structured process so you always know what's happening with your assessment.</p>
-  <div class="process-grid">
-    <div class="process-card">
-      <div class="step-num">01</div>
-      <div class="step-icon">💬</div>
-      <h3>WhatsApp Inquiry</h3>
-      <p>Reach us directly on WhatsApp to describe your assessment needs. Quick responses, no waiting.</p>
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-sub">Three simple steps to get your assessment done by experts</p>
     </div>
-    <div class="process-card">
-      <div class="step-num">02</div>
-      <div class="step-icon">📄</div>
-      <h3>Formal Agreement</h3>
-      <p>We draw up a clear agreement covering scope, timeline, and expectations before any work begins.</p>
-    </div>
-    <div class="process-card">
-      <div class="step-num">03</div>
-      <div class="step-icon">📋</div>
-      <h3>Choose Your Option</h3>
-      <p>Share materials directly or give us dashboard access — whichever is more convenient for you.</p>
-    </div>
-    <div class="process-card">
-      <div class="step-num">04</div>
-      <div class="step-icon">🔍</div>
-      <h3>Review & Invoice</h3>
-      <p>We assess requirements thoroughly and send you a transparent invoice for your approval.</p>
-    </div>
-    <div class="process-card">
-      <div class="step-num">05</div>
-      <div class="step-icon">✍️</div>
-      <h3>We Complete It</h3>
-      <p>Our team works on your assessment and uploads the completed work to a shared Google Drive folder.</p>
-    </div>
-    <div class="process-card">
-      <div class="step-num">06</div>
-      <div class="step-icon">✅</div>
-      <h3>Review & Submit</h3>
-      <p>You review, request any changes, approve, and we handle submission. Payment only after success.</p>
+    <div style="display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:start" class="reveal">
+      <div class="process-card">
+        <div class="process-num">💬</div>
+        <h3>Share Your Assessment Details</h3>
+        <p>Connect with us via WhatsApp, email, or our form. Share deadline, word count, citation style, and any special instructions.</p>
+      </div>
+      <div class="process-connector">›</div>
+      <div class="process-card">
+        <div class="process-num">👨‍💼</div>
+        <h3>Get Free Pre-Assessment Consultation</h3>
+        <p>We'll connect you with a subject expert to discuss scope, approach, and brainstorm key ideas for clarity before writing starts.</p>
+      </div>
+      <div class="process-connector">›</div>
+      <div class="process-card">
+        <div class="process-num">💳</div>
+        <h3>Get a Free Quote and Make Secure Payments</h3>
+        <p>After analyzing your deadline and complexity, we'll share a personalized quote. Negotiate pricing and make a secure payment to start.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- OPTIONS -->
-<section id="options" style="background: var(--dark);">
-  <div class="section-label">Service Options</div>
-  <div class="divider"></div>
-  <h2>Pick what works <em>for you</em></h2>
-  <p class="section-sub">Two ways to get started — both lead to the same expert result.</p>
-  <div class="options-grid">
-    <div class="option-card">
-      <div class="option-num">Option 01</div>
-      <h3>You Share Materials</h3>
-      <p>Provide us with the templates, briefs, and study materials needed. You stay in control throughout.</p>
-      <ul class="option-list">
-        <li>You upload templates and study resources</li>
-        <li>We review and get started right away</li>
-        <li>We deliver via Google Drive for your review</li>
-        <li>You handle the final submission yourself</li>
-      </ul>
+<!-- ── BLUE CTA BAND ── -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Can I Pay Someone To Write My Assessment For Me?</h2>
+    <p>Need help with assessments? Help is on its way! At AssessmentHelp, we have a highly motivated team of expert writers, customer support staff and quality check professionals working day and night to help you.</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="window.open('https://wa.me/your-number','_blank')">
+        Get Free Quote →
+      </button>
+      <button class="btn-outline-white" onclick="window.open('https://wa.me/your-number','_blank')">
+        Chat on WhatsApp
+      </button>
     </div>
-    <div class="option-card">
-      <div class="option-num">Option 02</div>
-      <h3>We Access Dashboard</h3>
-      <p>Share your college login and we take it from there — downloading, completing, and even submitting.</p>
-      <ul class="option-list">
-        <li>Share your college dashboard credentials</li>
-        <li>We download all required materials</li>
-        <li>We deliver to Google Drive for your approval</li>
-        <li>We submit directly on your behalf</li>
-      </ul>
+  </div>
+</div>
+
+<!-- ── PRICING ── -->
+<section id="pricing">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">Transparent Pricing</h2>
+      <p class="section-sub">See exactly what's included in every order</p>
+    </div>
+    <div class="pricing-grid reveal">
+      <div class="pricing-card featured">
+        <h3><span>Included in Price</span></h3>
+        <div class="price-row"><span class="price-label">Title Page & Cover</span><span class="price-val">FREE</span></div>
+        <div class="price-row"><span class="price-label">Table of Contents</span><span class="price-val">FREE</span></div>
+        <div class="price-row"><span class="price-label">Reference / Bibliography</span><span class="price-val">FREE</span></div>
+        <div class="price-row"><span class="price-label">Formatting (APA, Harvard, etc.)</span><span class="price-val">FREE</span></div>
+        <div class="price-row"><span class="price-label">Unlimited Revisions</span><span class="price-val">FREE</span></div>
+        <div class="price-row"><span class="price-label">Plagiarism Report</span><span class="price-val">FREE</span></div>
+        <div class="price-row"><span class="price-label">Topic Consultation</span><span class="price-val">FREE</span></div>
+        <div class="price-row"><span class="price-label">24/7 Support</span><span class="price-val">FREE</span></div>
+      </div>
+      <div class="pricing-card">
+        <h3>Premium Add-ons</h3>
+        <div class="addon-row"><span class="addon-label">VIP Support</span><span class="addon-price">$9.99</span></div>
+        <div class="addon-row"><span class="addon-label">Extended Revision Period</span><span class="addon-price">$4.99</span></div>
+        <div class="addon-row"><span class="addon-label">Top Writer Upgrade</span><span class="addon-price">$14.99</span></div>
+        <div class="addon-row"><span class="addon-label">Copy of Sources</span><span class="addon-price">$9.99</span></div>
+        <div class="pricing-from">
+          <small>Starting from</small>
+          <div><span class="pricing-price">$9.99</span><span class="pricing-per">/page</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="pricing-cta-card reveal">
+      <p>Not sure? Try our service with a 1-page trial</p>
+      <button class="btn-chat" style="margin:0 auto;display:inline-flex">Get Started →</button>
     </div>
   </div>
 </section>
 
-<!-- WHY US -->
-<section id="why">
-  <div class="section-label">Why AssessmentPro</div>
-  <div class="divider"></div>
-  <h2>Built around <em>your trust</em></h2>
-  <p class="section-sub">We've designed every part of our service to be transparent, fair, and stress-free.</p>
-  <div class="why-grid">
-    <div class="why-card">
-      <div class="why-icon">🔒</div>
-      <h3>Pay After Success</h3>
-      <p>We work first, you pay after successful submission. No risk, no upfront pressure — just results.</p>
+<!-- ── BENEFITS ── -->
+<section id="benefits">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">Benefits of Our Assessment Help</h2>
+      <p class="section-sub">Everything you need for academic success, all in one place</p>
     </div>
-    <div class="why-card">
-      <div class="why-icon">♾️</div>
-      <h3>Unlimited Revisions</h3>
-      <p>We keep refining until you're fully satisfied. Your approval is the only deadline that matters.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">📁</div>
-      <h3>Google Drive Delivery</h3>
-      <p>All work is shared via Google Drive — easy to access, review, and download anytime, anywhere.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">⚡</div>
-      <h3>Fast Turnaround</h3>
-      <p>We understand deadlines. Once the invoice is approved, we work efficiently to deliver on time.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">📝</div>
-      <h3>Formal Agreement</h3>
-      <p>Every engagement starts with a clear, signed agreement — protecting both you and us from day one.</p>
-    </div>
-    <div class="why-card">
-      <div class="why-icon">💬</div>
-      <h3>WhatsApp Support</h3>
-      <p>Direct access on WhatsApp means real responses from real people, whenever you need an update.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal" style="transition-delay:0.05s">
+        <div class="benefit-icon">✍️</div>
+        <h3>Expert Writers</h3>
+        <p>Our team of 1500+ PhD-certified writers have expertise across 120+ subjects and years of academic experience.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.1s">
+        <div class="benefit-icon">📄</div>
+        <h3>Original Content</h3>
+        <p>Every assessment is written from scratch, ensuring 100% originality with a plagiarism report included free.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.15s">
+        <div class="benefit-icon">⚡</div>
+        <h3>Fast Turnaround</h3>
+        <p>Need it urgently? We can deliver quality work in as little as 3 hours without compromising on quality.</p>
+      </div>
+      <div class="benefit-card reveal" style="transition-delay:0.2s">
+        <div class="benefit-icon">💰</div>
+        <h3>Money-Back Guarantee</h3>
+        <p>Not satisfied? Get a full refund with our money-back assurance — no questions asked.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section" id="contact">
-  <h2>Ready to get <em>started?</em></h2>
-  <p>Send us a message on WhatsApp — we'll respond quickly and get your assessment sorted.</p>
-  <a href="https://wa.me/your-number" class="wa-btn" target="_blank" rel="noopener">
-    <svg class="wa-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    Message Us on WhatsApp
-  </a>
+<!-- ── FAQ ── -->
+<section id="faq">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-sub">Everything you need to know about our assessment help service</p>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item open">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How do I place an order for assessment help?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Simply contact us via WhatsApp, email, or fill out our online form. Share your assessment details, deadline, and requirements. Our team will connect you with a suitable expert and provide a free quote within minutes.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can you handle urgent assessment orders?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Yes! We specialize in urgent deliveries. Our experts can complete assessments in as little as 3 hours for smaller tasks. For larger projects, we'll give you a realistic timeline to ensure quality is never compromised.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Is your assessment help confidential?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. We take privacy very seriously. Your personal details, order information, and communication with our team are 100% confidential and never shared with third parties. We use encrypted connections for all data.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What is your revision policy?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">We offer unlimited free revisions until you're completely satisfied. Simply share your feedback and our expert will make the necessary changes. Your satisfaction is our top priority and we won't stop until you approve.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do you provide a plagiarism report?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Yes, every order comes with a free plagiarism report. All our work is 100% original, written from scratch by our experts. We never use AI tools or recycled content — every assessment is unique and tailored to your requirements.</div></div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ── CONTACT ── -->
+<div class="cta-band" id="contact">
+  <div class="container" style="max-width:700px">
+    <h2>Ready to Get Started?</h2>
+    <p>Send us a WhatsApp message and get a free quote in under 5 minutes. No obligation, no upfront payment.</p>
+    <div class="cta-btns">
+      <button class="btn-white" onclick="window.open('https://wa.me/your-number','_blank')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#1D6FDB"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Message on WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
 <footer>
-  <a href="#" class="logo">Assess<span>Pro</span></a>
-  <p>© 2026 AssessPro. All rights reserved.</p>
-  <p style="color: var(--text-muted); font-size: 0.78rem;">Professional assessment support services</p>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="logo-icon">A</div>
+        <div>ASSESSMENT<br><small style="font-size:0.55rem;opacity:0.5;font-weight:400">Powered by The Student Helpline</small></div>
+      </div>
+      <p class="footer-tagline">Your trusted partner for professional academic assessment help. We help students achieve academic excellence worldwide.</p>
+      <div class="social-icons">
+        <div class="social-icon">f</div>
+        <div class="social-icon">𝕏</div>
+        <div class="social-icon">in</div>
+        <div class="social-icon">ig</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Our Services</h4>
+      <ul>
+        <li><a href="#">Assessment Help</a></li>
+        <li><a href="#">Assignment Help</a></li>
+        <li><a href="#">Coursework Help</a></li>
+        <li><a href="#">Essay Writing Help</a></li>
+        <li><a href="#">Dissertation Help</a></li>
+        <li><a href="#">Case Study Help</a></li>
+        <li><a href="#">Online Exam Help</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Subjects</h4>
+      <ul>
+        <li><a href="#">Management</a></li>
+        <li><a href="#">Law</a></li>
+        <li><a href="#">Nursing</a></li>
+        <li><a href="#">Engineering</a></li>
+        <li><a href="#">Accounting</a></li>
+        <li><a href="#">IT & Computer Science</a></li>
+        <li><a href="#">Finance & Economics</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Refund Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <div class="footer-contact-item">
+        <span class="fc-icon">✉</span>
+        <span>help@assessmenthelp.io</span>
+      </div>
+      <div class="footer-contact-item">
+        <span class="fc-icon">📞</span>
+        <span>+91 98765 43210<br>+44 791 802 3966</span>
+      </div>
+      <div class="footer-contact-item">
+        <span class="fc-icon">🕐</span>
+        <span>24/7 Support Available</span>
+      </div>
+      <button class="footer-wa-btn" onclick="window.open('https://wa.me/your-number','_blank')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 AssessmentHelp.io. All rights reserved.</p>
+    <div class="footer-trust">
+      <div class="footer-trust-item" style="font-size:0.75rem;color:rgba(255,255,255,0.35)">100% Secure Payment</div>
+      <div class="footer-trust-item" style="font-size:0.75rem;color:rgba(255,255,255,0.35)">All Major Cards Accepted</div>
+      <div class="footer-trust-item" style="font-size:0.75rem;color:rgba(255,255,255,0.35)">SSL Encrypted</div>
+    </div>
+    <p>Disclaimer: Services provided are for reference and research purposes only.</p>
+  </div>
 </footer>
 
+<!-- ── FLOATING WHATSAPP ── -->
+<div class="float-wa">
+  <button class="float-wa-btn" onclick="window.open('https://wa.me/your-number','_blank')">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </button>
+  <div class="float-wa-label" id="waLabel">
+    <span>Chat with Us</span>
+    <span class="x-btn" onclick="closeWaLabel(event)">✕</span>
+  </div>
+</div>
+
+<script>
+// ── SCROLL REVEAL ──
+const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+},{threshold:0.12});
+revealEls.forEach(el=>io.observe(el));
+
+// ── COUNTER ANIMATION ──
+function animateCounter(el){
+  const target = parseInt(el.dataset.target);
+  let current = 0;
+  const step = Math.ceil(target/60);
+  const timer = setInterval(()=>{
+    current = Math.min(current+step,target);
+    el.textContent = current;
+    if(current>=target) clearInterval(timer);
+  },20);
+}
+const counterEls = document.querySelectorAll('.counter');
+const cio = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){animateCounter(e.target);cio.unobserve(e.target)}});
+},{threshold:0.5});
+counterEls.forEach(el=>cio.observe(el));
+
+// ── FAQ ACCORDION ──
+function toggleFaq(btn){
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+// ── WHATSAPP LABEL ──
+function closeWaLabel(e){
+  e.stopPropagation();
+  document.getElementById('waLabel').classList.add('hidden');
+}
+setTimeout(()=>{
+  const lbl = document.getElementById('waLabel');
+  if(lbl && !lbl.classList.contains('hidden')) lbl.classList.add('hidden');
+},8000);
+
+// ── FORM SUBMIT ──
+function handleSubmit(btn){
+  btn.innerHTML = '✓ Sent! We\'ll contact you shortly';
+  btn.style.background = '#16a34a';
+  setTimeout(()=>{
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg> Get Free Quote →';
+    btn.style.background = '';
+  },3000);
+}
+
+// ── STICKY NAV HIGHLIGHT ──
+const sections = document.querySelectorAll('section[id],div[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll',()=>{
+  const scrollY = window.scrollY+100;
+  sections.forEach(sec=>{
+    if(scrollY>=sec.offsetTop && scrollY<sec.offsetTop+sec.offsetHeight){
+      navLinks.forEach(l=>l.classList.remove('active'));
+      const match = document.querySelector(`.nav-link[href="#${sec.id}"]`);
+      if(match) match.classList.add('active');
+    }
+  });
+});
+</script>
 </body>
 </html>
