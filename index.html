@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AssessPro — Expert Assessment Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #8B6E2A;
+    --dark: #0D0E12;
+    --dark-2: #13151C;
+    --dark-3: #1A1D27;
+    --dark-4: #21253A;
+    --text: #E8E4D9;
+    --text-muted: #8A8578;
+    --border: rgba(201,168,76,0.15);
+    --ff-head: 'Playfair Display', Georgia, serif;
+    --ff-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: var(--ff-body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,14,18,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: var(--ff-head);
+    font-size: 1.4rem;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .logo span { color: var(--text); }
+  nav ul { list-style: none; display: flex; gap: 36px; }
+  nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--dark) !important;
+    padding: 9px 22px;
+    border-radius: 4px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--dark) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 80%);
+  }
+  .hero-inner { position: relative; max-width: 780px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  h1 {
+    font-family: var(--ff-head);
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-weight: 700;
+    line-height: 1.12;
+    color: var(--text);
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 540px;
+    margin: 0 auto 44px;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+  .hero-btns {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.8s ease 0.3s both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--gold);
+    color: var(--dark);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--gold); transform: translateY(-1px); }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 5%; }
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  h2 {
+    font-family: var(--ff-head);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  h2 em { font-style: italic; color: var(--gold); }
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 520px;
+    margin-bottom: 60px;
+  }
+  .divider {
+    width: 48px; height: 2px;
+    background: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  /* ─── STATS ─── */
+  .stats {
+    background: var(--dark-2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 5%;
+    display: flex; justify-content: center;
+    gap: 0;
+  }
+  .stat {
+    flex: 1; max-width: 220px;
+    text-align: center;
+    padding: 0 32px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--ff-head);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label { font-size: 0.82rem; color: var(--text-muted); letter-spacing: 0.05em; }
+
+  /* ─── PROCESS ─── */
+  #process { background: var(--dark-2); }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .process-card {
+    background: var(--dark-2);
+    padding: 40px 36px;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .process-card:hover { background: var(--dark-3); }
+  .step-num {
+    font-family: var(--ff-head);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: rgba(201,168,76,0.1);
+    line-height: 1;
+    position: absolute;
+    top: 28px; right: 32px;
+  }
+  .step-icon {
+    width: 44px; height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+  }
+  .process-card h3 {
+    font-family: var(--ff-head);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .process-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* ─── OPTIONS ─── */
+  .options-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  .option-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 48px 44px;
+    background: var(--dark-2);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .option-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+  .option-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--gold);
+  }
+  .option-num {
+    font-family: var(--ff-head);
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .option-card h3 {
+    font-family: var(--ff-head);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .option-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
+  .option-list { list-style: none; }
+  .option-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .option-list li:last-child { border-bottom: none; }
+  .option-list li::before {
+    content: '→';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ─── WHY US ─── */
+  #why { background: var(--dark-3); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .why-card {
+    padding: 36px 32px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--dark-2);
+    transition: border-color 0.2s;
+  }
+  .why-card:hover { border-color: var(--gold-dim); }
+  .why-icon { font-size: 1.6rem; margin-bottom: 18px; }
+  .why-card h3 {
+    font-family: var(--ff-head);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .why-card p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.65; }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    background: var(--dark-4);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 100px 5%;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section h2 { margin-bottom: 18px; }
+  .cta-section p { color: var(--text-muted); margin-bottom: 44px; font-size: 1rem; }
+  .wa-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: #25D366;
+    color: white;
+    padding: 16px 36px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .wa-btn:hover { background: #1EBE5A; transform: translateY(-1px); }
+  .wa-icon { width: 22px; height: 22px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 48px 5%;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  footer .logo { font-size: 1.1rem; }
+  footer p { font-size: 0.8rem; color: var(--text-muted); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .stats { flex-wrap: wrap; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 24px 16px; }
+    .stat:last-child { border-bottom: none; }
+    .options-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Assess<span>Pro</span></a>
+  <ul>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#options">Options</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Professional Assessment Services</div>
+    <h1>We Handle Your<br><em>Assessments</em> With Care</h1>
+    <p>Expert academic support from initial review to final submission — delivered with full transparency, zero upfront payment.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">
+        <svg class="wa-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Chat on WhatsApp
+      </a>
+      <a href="#process" class="btn-outline">See How It Works →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Upfront service, pay after</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2</div>
+    <div class="stat-label">Flexible service options</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">∞</div>
+    <div class="stat-label">Revisions until approved</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">24/7</div>
+    <div class="stat-label">WhatsApp availability</div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-label">How It Works</div>
+  <div class="divider"></div>
+  <h2>From inquiry to <em>submission</em></h2>
+  <p class="section-sub">A clear, structured process so you always know what's happening with your assessment.</p>
+  <div class="process-grid">
+    <div class="process-card">
+      <div class="step-num">01</div>
+      <div class="step-icon">💬</div>
+      <h3>WhatsApp Inquiry</h3>
+      <p>Reach us directly on WhatsApp to describe your assessment needs. Quick responses, no waiting.</p>
+    </div>
+    <div class="process-card">
+      <div class="step-num">02</div>
+      <div class="step-icon">📄</div>
+      <h3>Formal Agreement</h3>
+      <p>We draw up a clear agreement covering scope, timeline, and expectations before any work begins.</p>
+    </div>
+    <div class="process-card">
+      <div class="step-num">03</div>
+      <div class="step-icon">📋</div>
+      <h3>Choose Your Option</h3>
+      <p>Share materials directly or give us dashboard access — whichever is more convenient for you.</p>
+    </div>
+    <div class="process-card">
+      <div class="step-num">04</div>
+      <div class="step-icon">🔍</div>
+      <h3>Review & Invoice</h3>
+      <p>We assess requirements thoroughly and send you a transparent invoice for your approval.</p>
+    </div>
+    <div class="process-card">
+      <div class="step-num">05</div>
+      <div class="step-icon">✍️</div>
+      <h3>We Complete It</h3>
+      <p>Our team works on your assessment and uploads the completed work to a shared Google Drive folder.</p>
+    </div>
+    <div class="process-card">
+      <div class="step-num">06</div>
+      <div class="step-icon">✅</div>
+      <h3>Review & Submit</h3>
+      <p>You review, request any changes, approve, and we handle submission. Payment only after success.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OPTIONS -->
+<section id="options" style="background: var(--dark);">
+  <div class="section-label">Service Options</div>
+  <div class="divider"></div>
+  <h2>Pick what works <em>for you</em></h2>
+  <p class="section-sub">Two ways to get started — both lead to the same expert result.</p>
+  <div class="options-grid">
+    <div class="option-card">
+      <div class="option-num">Option 01</div>
+      <h3>You Share Materials</h3>
+      <p>Provide us with the templates, briefs, and study materials needed. You stay in control throughout.</p>
+      <ul class="option-list">
+        <li>You upload templates and study resources</li>
+        <li>We review and get started right away</li>
+        <li>We deliver via Google Drive for your review</li>
+        <li>You handle the final submission yourself</li>
+      </ul>
+    </div>
+    <div class="option-card">
+      <div class="option-num">Option 02</div>
+      <h3>We Access Dashboard</h3>
+      <p>Share your college login and we take it from there — downloading, completing, and even submitting.</p>
+      <ul class="option-list">
+        <li>Share your college dashboard credentials</li>
+        <li>We download all required materials</li>
+        <li>We deliver to Google Drive for your approval</li>
+        <li>We submit directly on your behalf</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-label">Why AssessmentPro</div>
+  <div class="divider"></div>
+  <h2>Built around <em>your trust</em></h2>
+  <p class="section-sub">We've designed every part of our service to be transparent, fair, and stress-free.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🔒</div>
+      <h3>Pay After Success</h3>
+      <p>We work first, you pay after successful submission. No risk, no upfront pressure — just results.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">♾️</div>
+      <h3>Unlimited Revisions</h3>
+      <p>We keep refining until you're fully satisfied. Your approval is the only deadline that matters.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📁</div>
+      <h3>Google Drive Delivery</h3>
+      <p>All work is shared via Google Drive — easy to access, review, and download anytime, anywhere.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <h3>Fast Turnaround</h3>
+      <p>We understand deadlines. Once the invoice is approved, we work efficiently to deliver on time.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📝</div>
+      <h3>Formal Agreement</h3>
+      <p>Every engagement starts with a clear, signed agreement — protecting both you and us from day one.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💬</div>
+      <h3>WhatsApp Support</h3>
+      <p>Direct access on WhatsApp means real responses from real people, whenever you need an update.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Ready to get <em>started?</em></h2>
+  <p>Send us a message on WhatsApp — we'll respond quickly and get your assessment sorted.</p>
+  <a href="https://wa.me/your-number" class="wa-btn" target="_blank" rel="noopener">
+    <svg class="wa-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Message Us on WhatsApp
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo">Assess<span>Pro</span></a>
+  <p>© 2026 AssessPro. All rights reserved.</p>
+  <p style="color: var(--text-muted); font-size: 0.78rem;">Professional assessment support services</p>
+</footer>
+
+</body>
+</html>
