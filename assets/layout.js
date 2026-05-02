@@ -1,4 +1,4 @@
-const WA_NUMBER = 'https://wa.me/919876543210';
+const WA_NUMBER = 'https://wa.me/917206366729';
 
 // detect depth: services/ and subjects/ are one level deep
 const isRoot = !(location.pathname.includes('/services/') || location.pathname.includes('/subjects/'));
