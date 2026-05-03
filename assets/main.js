@@ -37,6 +37,19 @@ function initFaq(){
 function initForm(){
   document.querySelectorAll('.btn-submit').forEach(btn=>{
     btn.addEventListener('click',()=>{
+      const form = btn.closest('.quote-card') || btn.closest('.contact-form');
+      const agreeRow = form ? form.querySelector('.agree-row') : null;
+      const checkbox = agreeRow ? agreeRow.querySelector('input[type="checkbox"]') : null;
+
+      if (checkbox && !checkbox.checked) {
+        agreeRow.classList.remove('error');
+        void agreeRow.offsetWidth;
+        agreeRow.classList.add('error');
+        checkbox.focus();
+        return;
+      }
+      if (agreeRow) agreeRow.classList.remove('error');
+
       const orig=btn.innerHTML;
       btn.innerHTML='✓ Sent! We\'ll contact you shortly';
       btn.style.background='#16a34a';
