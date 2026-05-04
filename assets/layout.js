@@ -92,7 +92,7 @@ function footerHTML() {
         <li><a href="${pre}about.html">About Us</a></li>
         <li><a href="${pre}how-it-works.html">How It Works</a></li>
         <li><a href="${pre}contact.html">Contact Us</a></li>
-        <li><a href="${pre}assets/docs/service-agreement.pdf" target="_blank">Terms of Service</a></li>
+        <li><a href="${pre}terms.html">Terms &amp; Conditions</a></li>
         <li><a href="${pre}assets/docs/assignment-quotation.pdf" target="_blank">Sample Quotation</a></li>
         <li><a href="${pre}assets/docs/submission-status-update.pdf" target="_blank">Submission Updates</a></li>
       </ul></div>
