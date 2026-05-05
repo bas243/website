@@ -46,27 +46,14 @@ function handleSubmit(btn){
   }
   if (agreeRow) agreeRow.classList.remove('error');
 
-  // Collect all field values
+  // Collect by name attribute (reliable)
   const data = {};
   if (form) {
-    // Text/email/tel/date inputs
-    form.querySelectorAll('input[type="text"],input[type="email"],input[type="tel"],input[type="date"]').forEach((el, i) => {
-      const label = form.querySelectorAll('label')[i] ? form.querySelectorAll('label')[i].textContent.trim().replace(/\s*\*$/,'') : ('Field '+(i+1));
-      if (el.value.trim()) data[label] = el.value.trim();
+    form.querySelectorAll('input[name], select[name], textarea[name]').forEach(el => {
+      const val = el.value.trim();
+      if (val && val !== '— Select Service —') data[el.name] = val;
     });
-    // Selects (country code + service type)
-    const selects = form.querySelectorAll('select');
-    selects.forEach((sel, i) => {
-      const val = sel.options[sel.selectedIndex]?.text || sel.value;
-      if (val && val !== '— Select Service —') {
-        data[i === 0 && selects.length > 1 ? 'Country Code' : 'Service Type'] = val;
-      }
-    });
-    // Textarea
-    const ta = form.querySelector('textarea');
-    if (ta && ta.value.trim()) data['Additional Requirements'] = ta.value.trim();
-    // Page source
-    data['Page'] = document.title || window.location.pathname;
+    data['page'] = document.title || window.location.pathname;
   }
 
   // Loading state
@@ -86,6 +73,7 @@ function handleSubmit(btn){
   })
   .then(res => res.json())
   .then(json => {
+    console.log('Web3Forms response:', json);
     if (json.success) {
       btn.innerHTML = '✅ Sent! We\'ll contact you shortly';
       btn.style.background = '#16a34a';
@@ -95,12 +83,14 @@ function handleSubmit(btn){
       }
       setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.disabled = false; }, 4000);
     } else {
+      console.warn('Web3Forms error:', json);
       btn.innerHTML = '❌ Error — please try WhatsApp';
       btn.style.background = '#dc2626';
       setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.disabled = false; }, 4000);
     }
   })
-  .catch(() => {
+  .catch(err => {
+    console.error('Fetch error:', err);
     btn.innerHTML = '❌ Network error — please try WhatsApp';
     btn.style.background = '#dc2626';
     setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.disabled = false; }, 4000);
