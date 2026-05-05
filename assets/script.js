@@ -28,7 +28,8 @@ function toggleFaq(btn){
 }
 
 // ── FORM SUBMIT ──
-const FORMSPREE_URL = 'https://formspree.io/f/mbdwovzw';
+const WEB3FORMS_URL = 'https://api.web3forms.com/submit';
+const WEB3FORMS_KEY = '2c713ffc-e405-4846-a8c0-f32ea78cef4a';
 
 function handleSubmit(btn){
   const form = btn.closest('.quote-card') || btn.closest('.contact-form');
@@ -73,16 +74,21 @@ function handleSubmit(btn){
   btn.disabled = true;
   btn.innerHTML = '⏳ Sending…';
 
-  fetch(FORMSPREE_URL, {
+  fetch(WEB3FORMS_URL, {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    body: JSON.stringify({
+      access_key: WEB3FORMS_KEY,
+      subject: '📩 New Quote Request — AssessmentHelp',
+      from_name: 'AssessmentHelp Website',
+      ...data
+    })
   })
-  .then(res => {
-    if (res.ok) {
+  .then(res => res.json())
+  .then(json => {
+    if (json.success) {
       btn.innerHTML = '✅ Sent! We\'ll contact you shortly';
       btn.style.background = '#16a34a';
-      // Reset fields
       if (form) {
         form.querySelectorAll('input[type="text"],input[type="email"],input[type="tel"],input[type="date"],textarea').forEach(el => el.value = '');
         if (checkbox) checkbox.checked = false;
